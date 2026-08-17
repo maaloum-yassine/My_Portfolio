@@ -226,28 +226,28 @@ const cvLink = document.querySelector(".cv-link");
 const titles = ["Web Developer", "Download CV"];
 let index = 0;
 
-function changeTitle() {
-  index = (index + 1) % titles.length;
-  titleElement.style.opacity = 0; // Disparition rapide
+// function changeTitle() {
+//   index = (index + 1) % titles.length;
+//   titleElement.style.opacity = 0; // Disparition rapide
 
-  setTimeout(() => {
-    titleElement.textContent = titles[index];
-    titleElement.style.opacity = 1;
+//   setTimeout(() => {
+//     titleElement.textContent = titles[index];
+//     titleElement.style.opacity = 1;
 
-    // Si c'est "Download CV", on active le lien
-    if (titles[index] === "Download CV") {
-      titleElement.classList.add("clickable");
-    } else {
-      titleElement.classList.remove("clickable");
-    }
-  }, 200);
-}
+//     // Si c'est "Download CV", on active le lien
+//     if (titles[index] === "Download CV") {
+//       titleElement.classList.add("clickable");
+//     } else {
+//       titleElement.classList.remove("clickable");
+//     }
+//   }, 200);
+// }
 
-// Gérer le clic pour télécharger le CV
-titleElement.addEventListener("click", function () {
-  if (titles[index] === "Download CV") {
-    cvLink.click(); // Simule un clic sur le lien caché
-  }
-});
+// // Gérer le clic pour télécharger le CV
+// titleElement.addEventListener("click", function () {
+//   if (titles[index] === "Download CV") {
+//     cvLink.click(); // Simule un clic sur le lien caché
+//   }
+// });
 
-setInterval(changeTitle, 2500);
+// setInterval(changeTitle, 2500);
