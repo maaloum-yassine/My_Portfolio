@@ -1,20 +1,18 @@
-'use strict';
-
-
+"use strict";
 
 // element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
+const elementToggleFunc = function (elem) {
+  elem.classList.toggle("active");
+};
 
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
+sidebarBtn.addEventListener("click", function () {
+  elementToggleFunc(sidebar);
+});
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -31,29 +29,27 @@ const modalText = document.querySelector("[data-modal-text]");
 const testimonialsModalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
-}
+};
 
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
-
   testimonialsItem[i].addEventListener("click", function () {
-
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
+    modalTitle.innerHTML = this.querySelector(
+      "[data-testimonials-title]"
+    ).innerHTML;
+    modalText.innerHTML = this.querySelector(
+      "[data-testimonials-text]"
+    ).innerHTML;
 
     testimonialsModalFunc();
-
   });
-
 }
 
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
-
-
 
 // custom select variables
 const select = document.querySelector("[data-select]");
@@ -61,17 +57,17 @@ const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
-select.addEventListener("click", function () { elementToggleFunc(this); });
+select.addEventListener("click", function () {
+  elementToggleFunc(this);
+});
 
 // add event in all select items
 for (let i = 0; i < selectItems.length; i++) {
   selectItems[i].addEventListener("click", function () {
-
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     elementToggleFunc(select);
     filterFunc(selectedValue);
-
   });
 }
 
@@ -79,9 +75,7 @@ for (let i = 0; i < selectItems.length; i++) {
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
-
   for (let i = 0; i < filterItems.length; i++) {
-
     if (selectedValue === "all") {
       filterItems[i].classList.add("active");
     } else if (selectedValue === filterItems[i].dataset.category) {
@@ -89,18 +83,14 @@ const filterFunc = function (selectedValue) {
     } else {
       filterItems[i].classList.remove("active");
     }
-
   }
-
-}
+};
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 
 for (let i = 0; i < filterBtn.length; i++) {
-
   filterBtn[i].addEventListener("click", function () {
-
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
@@ -108,12 +98,8 @@ for (let i = 0; i < filterBtn.length; i++) {
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
-
   });
-
 }
-
-
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
@@ -122,7 +108,6 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
     for (let i = 0; i < pages.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
@@ -133,14 +118,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
-
   });
 }
 
-
-
-(function() {
-  emailjs.init("XLYsS7bopVh8mvAfw"); 
+(function () {
+  emailjs.init("XLYsS7bopVh8mvAfw");
   const form = document.getElementById("contact-form");
   const sendButton = form.querySelector("[data-form-btn]");
   sendButton.disabled = false;
@@ -158,19 +140,20 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }, 3000);
   }
 
-  form.addEventListener("submit", function(event) {
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const formData = {
       fullname: form.fullname.value,
       email: form.email.value,
-      message: form.message.value
+      message: form.message.value,
     };
 
     sendButton.disabled = true;
     showAlert("Envoi en cours...");
 
-    emailjs.send("service_byhx29f", "template_kn3xyej", formData)
+    emailjs
+      .send("service_cariyy9", "template_kn3xyej", formData)
       .then(() => {
         showAlert("Message envoyé avec succès !", "success");
         form.reset();
@@ -185,59 +168,58 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 })();
 
-
-
-
-
-const eyeIcons = document.querySelectorAll('.toggle-popup');
-const popups = document.querySelectorAll('.popup');
-const closePopupBtns = document.querySelectorAll('.close-popup');
+const eyeIcons = document.querySelectorAll(".toggle-popup");
+const popups = document.querySelectorAll(".popup");
+const closePopupBtns = document.querySelectorAll(".close-popup");
 let lastScrollY = 0; // Stocker la position du scroll
 
 // Ouvrir le popup sans remonter la page
-eyeIcons.forEach(eyeIcon => {
-  eyeIcon.addEventListener('click', function(event) {
+eyeIcons.forEach((eyeIcon) => {
+  eyeIcon.addEventListener("click", function (event) {
     event.preventDefault(); // Empêche le retour en haut
     event.stopPropagation(); // Empêche la propagation
 
     lastScrollY = window.scrollY; // Sauvegarde la position actuelle
 
-    const projectId = this.closest('.project-item').getAttribute('data-project');
+    const projectId =
+      this.closest(".project-item").getAttribute("data-project");
     const popup = document.querySelector(`.popup[data-project="${projectId}"]`);
     if (popup) {
-      popup.classList.add('visible');
+      popup.classList.add("visible");
     }
   });
 });
 
 // Fermer le popup et restaurer la position du scroll
-closePopupBtns.forEach(closePopupBtn => {
-  closePopupBtn.addEventListener('click', function(event) {
+closePopupBtns.forEach((closePopupBtn) => {
+  closePopupBtn.addEventListener("click", function (event) {
     event.stopPropagation();
-    const popup = this.closest('.popup');
-    popup.classList.remove('visible');
-    });
+    const popup = this.closest(".popup");
+    popup.classList.remove("visible");
+  });
 });
 
 // Fermer en cliquant en dehors
-window.addEventListener('click', function(event) {
-  popups.forEach(popup => {
-    if (!popup.contains(event.target) && !event.target.closest('.toggle-popup')) {
-      popup.classList.remove('visible');
+window.addEventListener("click", function (event) {
+  popups.forEach((popup) => {
+    if (
+      !popup.contains(event.target) &&
+      !event.target.closest(".toggle-popup")
+    ) {
+      popup.classList.remove("visible");
     }
   });
 });
 
 // Fermer avec la touche "Échap"
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    popups.forEach(popup => {
-      popup.classList.remove('visible');
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    popups.forEach((popup) => {
+      popup.classList.remove("visible");
     });
     window.scrollTo(0, lastScrollY);
   }
 });
-
 
 const titleElement = document.querySelector(".animated-title");
 const cvLink = document.querySelector(".cv-link");
